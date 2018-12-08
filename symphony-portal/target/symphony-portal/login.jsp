@@ -66,7 +66,7 @@
 		//让验证码5分钟刷新一次
 		setInterval(function() {
 			$("#verifyCodeImg").attr("src",
-					"/validate/image.jsp?time=" + new Date().getTime());
+					"resources/validate/image.jsp?time=" + new Date().getTime());
 		}, 1000 * 60 * 5);
 
 		//为验证码图片绑定一个点击换一张的单击功能
@@ -74,9 +74,18 @@
 				function() {
 					$(this).attr(
 							"src",
-							"/validate/image.jsp?time="
+							"resources/validate/image.jsp?time="
 									+ new Date().getTime());
 				});
+		//为验证码图片绑定一个点击换一张的单击功能
+		$("#verId2").click(
+				function() {
+					$(this).attr(
+							"src",
+							"resources/validate/image.jsp?time="
+									+ new Date().getTime());
+				});
+		
 
 		$("#loginForm").ajaxForm({
 			beforeSubmit : function(arr, $form, options) {
@@ -97,7 +106,7 @@
 				return false;
 			},
 			success : function(data) {
-				if (data.code == 0) {
+				if (data.status == 0) {
 					$("#loginErrorMsg").text(data.msg);
 				} else {
 					window.location.href = "/home.jsp";
@@ -128,7 +137,7 @@
 			<div class="col-sm-7">
 				<div class="signin-info">
 					<div class="logopanel m-b">
-						<h1 style="color: black">WelCome come to Symphonys</h1>
+						<h1>WelCome come to Symphonys</h1>
 					</div>	
 					<div class="m-b"></div>
 					<h4>
@@ -141,13 +150,16 @@
 						<li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 相对湿度85%，风力3级</li>
 						<li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 外出指数</li>
 					</ul>
-					<strong>还没有账号？ <a href="#">立即注册&raquo;</a></strong>
+					<strong>还没有账号？ <a href="#" style="color:pink;">立即注册&raquo;</a></strong>
+					<br>
+					<strong>忘记密码了？ <a href="#" style="color:black;">找回密码&raquo;</a></strong>
+					
 				</div>
 			</div>
 			<div class="col-sm-5">
 				<form id="loginForm" method="post" action="/user/login.html">
 					<div class="form-group has-error">
-						<label class="control-label" for="inputError1" id="inputErrorid">欢迎登录本社区！</label>
+						<label class="control-label" for="inputError1" id="inputErrorid" style="color: #000000;font-size: 20px">欢迎登录本社区！</label>
 					</div>
 					<input type="text" id="uname" name="uname"
 						class="form-control uname" placeholder="用户名" /> <span
@@ -158,12 +170,12 @@
 						class="form-control  code" placeholder="验证码" /> <span
 						id="verifyMsg"></span> <img style="cursor: pointer;"
 						id="verifyCodeImg" alt="" title="看不清,换一张"
-						src="resources/validate/image.jsp"> <a
-						href="javascript:void(0)" id="verId2">看不清？点击图片更换</a> <a href="">忘记密码了？</a>
+						src="resources/validate/image.jsp"> 
+						<a href="javascript:void(0)">看不清？点击图片更换</a>
+						
 
 					<div id="loginErrorMsg" style="color: red"></div>
-					<button id="submit_btn" type="submit"
-						class="btn btn-success btn-block">登录</button>
+					<button id="submit_btn" type="submit" class="btn btn-success btn-block">登录</button>
 				</form>
 			</div>
 		</div>

@@ -66,7 +66,7 @@
 		//让验证码5分钟刷新一次
 		setInterval(function() {
 			$("#verifyCodeImg").attr("src",
-					"/validate/image.jsp?time=" + new Date().getTime());
+					"resources/validate/image.jsp?time=" + new Date().getTime());
 		}, 1000 * 60 * 5);
 
 		//为验证码图片绑定一个点击换一张的单击功能
@@ -74,9 +74,18 @@
 				function() {
 					$(this).attr(
 							"src",
-							"/validate/image.jsp?time="
+							"resources/validate/image.jsp?time="
 									+ new Date().getTime());
 				});
+		//为验证码图片绑定一个点击换一张的单击功能
+		$("#verId2").click(
+				function() {
+					$(this).attr(
+							"src",
+							"resources/validate/image.jsp?time="
+									+ new Date().getTime());
+				});
+		
 
 		$("#loginForm").ajaxForm({
 			beforeSubmit : function(arr, $form, options) {
@@ -97,10 +106,15 @@
 				return false;
 			},
 			success : function(data) {
-				if (data.code == 0) {
+				/*这个eval可以将data的json串转换成js对象  */
+				/* var obj = eval('(' + data + ')'); */
+				console.log(data);
+				if (data.status == 0) {
+					console.log("no");
 					$("#loginErrorMsg").text(data.msg);
 				} else {
-					window.location.href = "/home.jsp";
+					/* window.location.href = "/home.jsp"; */
+					console.log("ok");
 				}
 			}
 		});
@@ -142,6 +156,9 @@
 						<li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 外出指数</li>
 					</ul>
 					<strong>还没有账号？ <a href="#" style="color:pink;">立即注册&raquo;</a></strong>
+					<br>
+					<strong>忘记密码了？ <a href="#" style="color:black;">找回密码&raquo;</a></strong>
+					
 				</div>
 			</div>
 			<div class="col-sm-5">
@@ -158,8 +175,9 @@
 						class="form-control  code" placeholder="验证码" /> <span
 						id="verifyMsg"></span> <img style="cursor: pointer;"
 						id="verifyCodeImg" alt="" title="看不清,换一张"
-						src="resources/validate/image.jsp"> <a
-						href="javascript:void(0)" id="verId2">看不清？点击图片更换</a> <a href="">忘记密码了？</a>
+						src="resources/validate/image.jsp"> 
+						<a href="javascript:void(0)">看不清？点击图片更换</a>
+						
 
 					<div id="loginErrorMsg" style="color: red"></div>
 					<button id="submit_btn" type="submit" class="btn btn-success btn-block">登录</button>

@@ -46,7 +46,12 @@
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
 
-		
+
+		<dependency>
+			<groupId>cn.yunCloud</groupId>
+			<artifactId>symphony-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 
