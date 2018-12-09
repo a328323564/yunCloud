@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.symphony.common.pojo.SymphonyResult;
 import cn.symphony.common.utils.JsonUtils;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping(value="/user",produces="text/html;charset=UTF-8")
 public class UserController {
 
 	@RequestMapping(value = "/login")
@@ -54,6 +55,13 @@ public class UserController {
 		out.print(symJSON);
 		out.flush();// 强制刷新
 		out.close();
+	}
+	
+	
+	@RequestMapping("/test")
+	@ResponseBody
+	public String test() {
+		return "这是中文.";
 	}
 
 }
