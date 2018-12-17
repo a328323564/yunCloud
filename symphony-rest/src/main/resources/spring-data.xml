@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+
+
+	<!--配置数据源/连接池 -->
+	<bean name="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<!-- 四要素 -->
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/symphony"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+		<!-- 配置其他相关属性 -->
+		<!-- 最大连接数 -->
+		<property name="maxActive" value="10"></property>
+		<!--空闲数 -->
+		<property name="minIdle" value="2"></property>
+	</bean>
+
+
+	<!-- 配置mybatis需要的工厂类对象（整合mybatis到spring） -->
+	<bean name="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 注入数据源 -->
+		<property name="dataSource" ref="druidDataSource"></property>
+
+		<!-- 扫描Mapper层中所有的xml文件 -->
+		<property name="mapperLocations" value="classpath:cn/symphony/manager/mapper/*Mapper.xml"></property>
+	</bean>
+
+
+	<!--配置mybatis框架，自动生成动态代理 -->
+	<bean name="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 指定哪个工厂负责生产这些动态代理 -->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean"></property>
+		<!-- 指定扫描哪些接口用来创建代理对象 -->
+		<property name="basePackage" value="cn.symphony.manager.mapper"></property>
+	</bean>
+
+
+	<!-- 配置事务管理器 -->
+	<bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!--注入数据源 -->
+		<property name="dataSource" ref="druidDataSource"></property>
+	</bean>
+
+
+	<!--配置事务规则 -->
+	<tx:advice id="tx" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- isolation="DEFAULT" 事物的隔离级别，也叫做READ_COMMINTED propagation="REQUIRED" 
+				事物的传播行为 rollback-for="EXCEPTION" 回滚机制。 在service层，如果手动处理了异常，事物不会自动回滚。 rollback-for="EXCEPTION"作用：在有异常时，强制回滚事物。 -->
+			<tx:method name="insert*" isolation="DEFAULT"
+				propagation="REQUIRED" rollback-for="EXCEPTION" />
+			<tx:method name="save*" isolation="DEFAULT"
+				propagation="REQUIRED" rollback-for="EXCEPTION" />
+			<tx:method name="delete*" isolation="DEFAULT"
+				propagation="REQUIRED" rollback-for="EXCEPTION" />
+			<tx:method name="update*" isolation="DEFAULT"
+				propagation="REQUIRED" rollback-for="EXCEPTION" />
+			<!-- 设置只读事务 -->
+			<tx:method name="select*" read-only="true" />
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="login*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<!--配置事务的切面aop -->
+	<aop:config>
+		<aop:pointcut expression="execution(* cn.symphony.rest.service.*.*(..))" id="pt"/>
+		<aop:advisor advice-ref="tx" pointcut-ref="pt"/>
+	</aop:config>
+	
+</beans>
