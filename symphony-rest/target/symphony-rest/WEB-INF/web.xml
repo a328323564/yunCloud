@@ -49,12 +49,4 @@
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 	
-	
-	
-	<!--配置监听器  -->
-	<!-- Bootstraps the root web application context before servlet initialization -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-	
 </web-app>

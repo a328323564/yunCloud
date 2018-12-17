@@ -10,6 +10,12 @@
         <dependent-module archiveName="symphony-dubbo-server-api-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/symphony-dubbo-server-api/symphony-dubbo-server-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="symphony-manager-mapper-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/symphony-manager-mapper/symphony-manager-mapper">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="symphony-manager-pojo-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/symphony-manager-pojo/symphony-manager-pojo">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="symphony-rest"/>
         <property name="java-output-path" value="/symphony-rest/target/classes"/>
     </wb-module>

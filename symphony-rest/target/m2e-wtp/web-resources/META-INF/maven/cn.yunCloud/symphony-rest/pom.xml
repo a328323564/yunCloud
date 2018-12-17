@@ -60,14 +60,12 @@
 		<!--mybatis框架 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+		</dependency>
 
 		<!-- 导入jdbc、连接池依赖 -->
 		<!-- MySql -->
@@ -150,6 +148,16 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>cn.yunCloud</groupId>
+			<artifactId>symphony-manager-mapper</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.yunCloud</groupId>
+			<artifactId>symphony-manager-pojo</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<build>
 

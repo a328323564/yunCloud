@@ -16,6 +16,6 @@
 	<dubbo:protocol port="20881" name="dubbo"/>
 	
 	<!-- 4、开启dubbo注解 -->
-	<dubbo:annotation package="cn.symphony.rest.service"/>
+	<dubbo:annotation package="cn.symphony.rest.service.impl"/>
 	
 </beans>
