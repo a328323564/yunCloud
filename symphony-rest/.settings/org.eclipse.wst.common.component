@@ -4,6 +4,12 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="symphony-common-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/symphony-common/symphony-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="symphony-dubbo-server-api-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/symphony-dubbo-server-api/symphony-dubbo-server-api">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="symphony-rest"/>
         <property name="java-output-path" value="/symphony-rest/target/classes"/>
     </wb-module>

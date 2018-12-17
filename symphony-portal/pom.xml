@@ -45,11 +45,51 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
+		
+
+		<!-- 添加dubbo依赖 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+			<version>2.5.3</version>
+			<exclusions>
+				<exclusion>
+					<!-- 排除传递spring依赖 -->
+					<artifactId>spring</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+			<version>3.3.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.sgroschupf</groupId>
+			<artifactId>zkclient</artifactId>
+			<version>0.1</version>
+		</dependency>
+
+
+
 
 
 		<dependency>
 			<groupId>cn.yunCloud</groupId>
 			<artifactId>symphony-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.yunCloud</groupId>
+			<artifactId>symphony-dubbo-server-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
@@ -67,7 +107,7 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<!-- 在插件中，指定项目的访问路径 指定项目访问的端口 -->
 				<configuration>
-					<port>8888</port>
+					<port>8080</port>
 					<!-- tomcat映射所有的请求 -->
 					<path>/</path>
 					<uriEncoding>UTF-8</uriEncoding>

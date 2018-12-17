@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- !、配置一个服务名，用来计算|统计引用关系 -->
+	<dubbo:application name="symphony-rest-provider"/>
+	
+	
+	<!-- 2、配置注册中心(集群) -->
+	<dubbo:registry protocol="zookeeper" address="192.168.214.137:2181,192.168.214.137:2182,192.168.214.137:2183"/>
+	
+	<!-- 3、给这个服务指定一个服务端口，在注册中心暴露这个服务 -->
+	<dubbo:protocol port="20881" name="dubbo"/>
+	
+	<!-- 4、开启dubbo注解 -->
+	<dubbo:annotation package="cn.symphony.rest.service"/>
+	
+</beans>

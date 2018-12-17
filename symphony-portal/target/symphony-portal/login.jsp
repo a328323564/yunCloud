@@ -106,10 +106,15 @@
 				return false;
 			},
 			success : function(data) {
+				/*这个eval可以将data的json串转换成js对象  */
+				/* var obj = eval('(' + data + ')'); */
+				console.log(data);
 				if (data.status == 0) {
+					console.log("no");
 					$("#loginErrorMsg").text(data.msg);
 				} else {
-					window.location.href = "/home.jsp";
+					/* window.location.href = "/home.jsp"; */
+					console.log("ok");
 				}
 			}
 		});

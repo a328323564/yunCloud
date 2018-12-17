@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 1、定义服务名，用来计算依赖关系 -->
+	<dubbo:application name="dubbo-consumer" />
+
+	<!-- 2、指定注册中心 -->
+	<dubbo:registry protocol="zookeeper"
+		address="192.168.214.137:2181,192.168.214.137:2182,192.168.214.137:2183" />
+
+	<!--开启dubbo注解 -->
+	<dubbo:annotation package="cn.symphony.portal" />
+
+	<!-- 3、向注册中心中订阅服务 -->
+	<dubbo:reference interface="cn.symphony.dubbo.api.service.UserService" id="userServiceApi" />
+</beans>
